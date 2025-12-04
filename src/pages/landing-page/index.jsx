@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import HeaderNavigation from '../../components/navigation/HeaderNavigation';
-import FloatingProgressIndicator from '../../components/navigation/FloatingProgressIndicator';
-import StickyConversionCTA from '../../components/navigation/StickyConversionCTA';
 import ExitIntentModal from '../../components/navigation/ExitIntentModal';
 import HeroSection from './components/HeroSection';
 import PlatformVisionSection from './components/PlatformVisionSection';
@@ -28,8 +26,7 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <HeaderNavigation />
-      <FloatingProgressIndicator />
-      <StickyConversionCTA />
+      {/* FloatingProgressIndicator and StickyConversionCTA removed for performance */}
       <ExitIntentModal />
       
       <main>
