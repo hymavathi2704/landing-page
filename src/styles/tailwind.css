@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Colors */
+    --color-primary: #2D5D5D; /* teal-800 - Brand anchor + trust building */
+    --color-primary-foreground: #FFFFFF; /* white - Maximum contrast for readability */
+    
+    /* Secondary Colors */
+    --color-secondary: #B8860B; /* darkgoldenrod - CTA power + premium highlights */
+    --color-secondary-foreground: #FFFFFF; /* white - Ensures WCAG AA contrast */
+    
+    /* Accent Colors */
+    --color-accent: #D4AF37; /* gold - Conversion moments + success states */
+    --color-accent-foreground: #1A1A1A; /* gray-900 - Dark text on gold background */
+    
+    /* Background Colors */
+    --color-background: #F5F5DC; /* beige - Clean canvas for effortless scanning */
+    --color-foreground: #1A1A1A; /* gray-900 - Maximum contrast for scanning */
+    
+    /* Surface Colors */
+    --color-card: #FFFFFF; /* white - Form fields + card separation */
+    --color-card-foreground: #1A1A1A; /* gray-900 - Primary text on cards */
+    
+    --color-popover: #FFFFFF; /* white - Dropdown backgrounds */
+    --color-popover-foreground: #1A1A1A; /* gray-900 - Dropdown text */
+    
+    /* Muted Colors */
+    --color-muted: #E5E5E5; /* gray-200 - Subtle backgrounds */
+    --color-muted-foreground: #4A4A4A; /* gray-600 - Supporting without distraction */
+    
+    /* Border & Input */
+    --color-border: #E5E5E5; /* gray-200 - Form inputs only */
+    --color-input: #FFFFFF; /* white - Input field backgrounds */
+    --color-ring: #B8860B; /* darkgoldenrod - Focus ring color */
+    
+    /* Semantic Colors */
+    --color-success: #228B22; /* forestgreen - Form completion + positive reinforcement */
+    --color-success-foreground: #FFFFFF; /* white - Text on success backgrounds */
+    
+    --color-warning: #FF8C00; /* darkorange - Scarcity timers + urgency elements */
+    --color-warning-foreground: #FFFFFF; /* white - Text on warning backgrounds */
+    
+    --color-error: #DC143C; /* crimson - Form validation only */
+    --color-error-foreground: #FFFFFF; /* white - Text on error backgrounds */
+    
+    --color-destructive: #DC143C; /* crimson - Destructive actions */
+    --color-destructive-foreground: #FFFFFF; /* white - Text on destructive backgrounds */
+    
+    /* Typography */
+    --font-headline: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+    --font-accent: 'Playfair Display', serif;
+    
+    /* Shadows */
+    --shadow-cta: 0 4px 6px -1px rgba(45, 93, 93, 0.1);
+    --shadow-card: 0 2px 4px -1px rgba(45, 93, 93, 0.05);
+    
+    /* Border Radius */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Primary Colors */
+    --color-primary: #3A7A7A; /* teal-700 - Lighter for dark mode */
+    --color-primary-foreground: #FFFFFF; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #D4AF37; /* gold - More visible in dark mode */
+    --color-secondary-foreground: #1A1A1A; /* gray-900 */
+    
+    /* Accent Colors */
+    --color-accent: #E5C158; /* lightgold - Brighter for dark mode */
+    --color-accent-foreground: #1A1A1A; /* gray-900 */
+    
+    /* Background Colors */
+    --color-background: #0A0A0A; /* gray-950 - Dark background */
+    --color-foreground: #F5F5F5; /* gray-100 - Light text */
+    
+    /* Surface Colors */
+    --color-card: #1A1A1A; /* gray-900 - Dark cards */
+    --color-card-foreground: #F5F5F5; /* gray-100 */
+    
+    --color-popover: #1A1A1A; /* gray-900 */
+    --color-popover-foreground: #F5F5F5; /* gray-100 */
+    
+    /* Muted Colors */
+    --color-muted: #2A2A2A; /* gray-800 */
+    --color-muted-foreground: #A0A0A0; /* gray-400 */
+    
+    /* Border & Input */
+    --color-border: #2A2A2A; /* gray-800 */
+    --color-input: #1A1A1A; /* gray-900 */
+    --color-ring: #D4AF37; /* gold */
+    
+    /* Semantic Colors */
+    --color-success: #2ECC71; /* emerald - Brighter for dark mode */
+    --color-success-foreground: #FFFFFF; /* white */
+    
+    --color-warning: #FFA500; /* orange - More visible */
+    --color-warning-foreground: #1A1A1A; /* gray-900 */
+    
+    --color-error: #E74C3C; /* red - Softer for dark mode */
+    --color-error-foreground: #FFFFFF; /* white */
+    
+    --color-destructive: #E74C3C; /* red */
+    --color-destructive-foreground: #FFFFFF; /* white */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headline);
+  }
+}
