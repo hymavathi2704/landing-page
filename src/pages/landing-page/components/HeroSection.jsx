@@ -2,6 +2,53 @@ import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/ui/AppIcon';
 import Button from '../../../components/ui/Button';
 
+// Custom SVG component based on the user's provided logo image
+const EquibudxLogoSVG = ({ size = 160, className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 100 100"
+    width={size}
+    height={size}
+    className={className}
+    fill="none"
+  >
+    {/* Outer Circle Background (Beige/Card) */}
+    <circle cx="50" cy="50" r="49" fill="var(--color-card)" />
+
+    {/* Outer Border (Dark Goldenrod / Secondary) */}
+    <circle cx="50" cy="50" r="49" stroke="var(--color-secondary)" strokeWidth="3" />
+    <circle cx="50" cy="50" r="45" stroke="var(--color-primary)" strokeWidth="1.5" />
+    
+    {/* Inner X Shape (Teal / Primary) */}
+    <path
+      d="M20 18 L48 50 M52 50 L80 18 M20 82 L48 50 M52 50 L80 82"
+      stroke="var(--color-primary)"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    
+    {/* Center Flower/Lotus (Dark Goldenrod / Secondary) */}
+    {/* Flower Stem/Leaves */}
+    <path d="M50 50 L50 70 M45 60 Q48 58 50 56 Q52 58 55 60" stroke="var(--color-secondary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="var(--color-secondary)" />
+    {/* Flower Bud */}
+    <path d="M50 30 V50 C45 45 40 40 50 30 C60 40 55 45 50 50 Z" fill="var(--color-secondary)" />
+
+    {/* Balance Scale - Bar (Secondary) */}
+    <line x1="33" y1="40" x2="67" y2="40" stroke="var(--color-secondary)" strokeWidth="2" strokeLinecap="round" />
+    <line x1="50" y1="30" x2="50" y2="40" stroke="var(--color-secondary)" strokeWidth="2" strokeLinecap="round" />
+
+    {/* Balance Scale - Left Pan (Secondary) */}
+    <line x1="33" y1="40" x2="33" y2="45" stroke="var(--color-secondary)" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M30 48 H36 A3 3 0 0 0 36 48" stroke="var(--color-secondary)" strokeWidth="1.5" strokeLinecap="round" fill="var(--color-card)" />
+
+    {/* Balance Scale - Right Pan (Secondary) */}
+    <line x1="67" y1="40" x2="67" y2="45" stroke="var(--color-secondary)" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M64 48 H70 A3 3 0 0 0 70 48" stroke="var(--color-secondary)" strokeWidth="1.5" strokeLinecap="round" fill="var(--color-card)" />
+  </svg>
+);
+
+
 const HeroSection = () => {
   const [waitlistCount, setWaitlistCount] = useState(1247);
   const [isLogoAnimated, setIsLogoAnimated] = useState(false);
@@ -49,18 +96,14 @@ const HeroSection = () => {
           <div className={`inline-flex items-center justify-center mb-8 transition-all duration-1000 ${isLogoAnimated ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
             <div className="relative w-32 h-32 lg:w-40 lg:h-40">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-secondary opacity-10 animate-pulse"></div>
-              <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center shadow-cta">
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Icon name="Scale" size={48} color="var(--color-primary)" className="animate-pulse" />
-                  </div>
-                  <div className="relative flex items-center justify-center">
-                    <span className="font-headline font-bold text-4xl lg:text-5xl text-primary">EX</span>
-                  </div>
-                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
-                    <Icon name="Flower2" size={24} color="var(--color-secondary)" />
-                  </div>
-                </div>
+              <div className="absolute inset-0 rounded-full flex items-center justify-center shadow-cta">
+                
+                {/* Custom SVG Logo component */}
+                <EquibudxLogoSVG 
+                  size={160} // Matches the w-40 h-40 container (160px)
+                  className="relative z-10" 
+                />
+                
               </div>
             </div>
           </div>

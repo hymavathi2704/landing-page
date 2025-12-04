@@ -3,7 +3,6 @@ import HeaderNavigation from '../../components/navigation/HeaderNavigation';
 import ExitIntentModal from '../../components/navigation/ExitIntentModal';
 import HeroSection from './components/HeroSection';
 import PlatformVisionSection from './components/PlatformVisionSection';
-import TestimonialsSection from './components/TestimonialsSection';
 import BenefitsSection from './components/BenefitsSection';
 import FeaturesSection from './components/FeaturesSection';
 import WaitlistSection from './components/WaitlistSection';
@@ -26,13 +25,12 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <HeaderNavigation />
-      {/* FloatingProgressIndicator and StickyConversionCTA removed for performance */}
       <ExitIntentModal />
       
       <main>
         <HeroSection />
         <PlatformVisionSection />
-        <TestimonialsSection />
+        {/* TestimonialsSection removed */}
         <BenefitsSection />
         <FeaturesSection />
         <WaitlistSection />
