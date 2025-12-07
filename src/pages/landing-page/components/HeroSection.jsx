@@ -53,14 +53,11 @@ const HeroSection = () => {
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-secondary opacity-10 animate-pulse"></div>
               <div className="absolute inset-0 rounded-full flex items-center justify-center shadow-cta">
                 
-                {/* TO CHANGE THE LOGO:
-                  1. Add your new logo file (e.g., to public/assets/images/).
-                  2. Update the 'src' attribute below with the path to your new file.
-                */}
+                {/* LOGO IMAGE: Uses object-cover to fully fill the circle, removing the previous padding. */}
                 <img 
-                  src="/assets/images/new-logo.png" // ⬅️ UPDATE THIS PATH WITH YOUR NEW LOGO FILE
+                  src="/assets/images/new-logo.png" // ⬅️ Ensure this path points to your uploaded image file (image_67ce59.jpg)
                   alt="Equibudx Logo" 
-                  className="w-full h-full object-contain relative z-10 p-4 rounded-full" 
+                  className="w-full h-full object-cover relative z-10 rounded-full" 
                 />
                 
               </div>

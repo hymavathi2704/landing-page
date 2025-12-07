@@ -6,7 +6,6 @@ import PlatformVisionSection from './components/PlatformVisionSection';
 import BenefitsSection from './components/BenefitsSection';
 import FeaturesSection from './components/FeaturesSection';
 import WaitlistSection from './components/WaitlistSection';
-import LaunchTimelineSection from './components/LaunchTimelineSection';
 import SocialProofSection from './components/SocialProofSection';
 import FAQSection from './components/FAQSection';
 import FinalCTASection from './components/FinalCTASection';
@@ -34,7 +33,7 @@ const LandingPage = () => {
         <BenefitsSection />
         <FeaturesSection />
         <WaitlistSection />
-        <LaunchTimelineSection />
+        {/* LaunchTimelineSection removed */}
         <SocialProofSection />
         <FAQSection />
         <FinalCTASection />
