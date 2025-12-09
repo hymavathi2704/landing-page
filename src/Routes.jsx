@@ -21,10 +21,10 @@ const Routes = () => {
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="*" element={<NotFound />} />
         
-        {/* NEW LEGAL ROUTES */}
-        <Route path="/Privacy Policy" element={<PrivacyPolicy />} />
-        <Route path="/Refund and Cancellation Policy" element={<RefundAndCancellationPolicy />} />
-        <Route path="/Terms and Conditions" element={<TermsAndConditions />} />
+        {/* UPDATED LEGAL ROUTES: Using hyphens for cleaner URLs */}
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/refund-and-cancellation-policy" element={<RefundAndCancellationPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
 
       </RouterRoutes>
       </ErrorBoundary>

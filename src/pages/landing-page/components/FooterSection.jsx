@@ -9,11 +9,11 @@ const FooterSection = () => {
     platform: [],
     company: [],
     resources: [],
-    // UPDATED: Legal links pointing to new page routes
+    // UPDATED: Legal links with hyphenated paths
     legal: [
-        { label: 'Privacy Policy', href: '/Privacy Policy' }, 
-        { label: 'Terms and Conditions', href: '/Terms and Conditions' }, 
-        { label: 'Refund and Cancellation Policy', href: '/Refund and Cancellation Policy' } 
+        { label: 'Privacy Policy', href: '/privacy-policy' }, 
+        { label: 'Terms and Conditions', href: '/terms-and-conditions' }, 
+        { label: 'Refund and Cancellation Policy', href: '/refund-and-cancellation-policy' } 
     ]
   };
 
