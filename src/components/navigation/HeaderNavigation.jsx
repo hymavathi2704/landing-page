@@ -52,22 +52,8 @@ const HeaderNavigation = () => {
       setIsMobileMenuOpen(false);
     }
   };
-
-  const scrollToWaitlist = (e) => {
-    e?.preventDefault();
-    const element = document.querySelector('#waitlist');
-    if (element) {
-      const elementPosition = element?.getBoundingClientRect()?.top + window.pageYOffset;
-      const offsetPosition = elementPosition - 80;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-
-      setIsMobileMenuOpen(false);
-    }
-  };
+  
+  // REMOVED: scrollToWaitlist function is removed
 
   return (
     <header
@@ -104,7 +90,8 @@ const HeaderNavigation = () => {
             ))}
           </div>
 
-          <div className="hidden lg:block">
+          {/* REMOVED: Join Waitlist button for desktop view */}
+          {/* <div className="hidden lg:block">
             <Button
               variant="default"
               onClick={scrollToWaitlist}
@@ -112,7 +99,7 @@ const HeaderNavigation = () => {
             >
               Join Waitlist
             </Button>
-          </div>
+          </div> */}
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -139,7 +126,8 @@ const HeaderNavigation = () => {
                   {item?.label}
                 </a>
               ))}
-              <div className="px-4 pt-2">
+              {/* REMOVED: Join Waitlist button for mobile view */}
+              {/* <div className="px-4 pt-2">
                 <Button
                   variant="default"
                   onClick={scrollToWaitlist}
@@ -148,7 +136,7 @@ const HeaderNavigation = () => {
                 >
                   Join Waitlist
                 </Button>
-              </div>
+              </div> */}
             </div>
           </div>
         )}

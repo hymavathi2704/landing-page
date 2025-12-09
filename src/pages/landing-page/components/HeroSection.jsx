@@ -56,7 +56,7 @@ const HeroSection = () => {
                 
                 {/* LOGO IMAGE: Uses object-cover to fully fill the circle, removing the previous padding. */}
                 <img 
-                  src="/assets/images/new-logo.png" // ⬅️ Ensure this path points to your uploaded image file (image_67ce59.jpg)
+                  src="/assets/images/newlogo.png" // ⬅️ Ensure this path points to your uploaded image file (image_67ce59.jpg)
                   alt="Equibudx Logo" 
                   className="w-full h-full object-cover relative z-10 rounded-full" 
                 />
@@ -72,7 +72,7 @@ const HeroSection = () => {
 
           <p className="font-body text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
             The only platform treating everyone as equals in your growth journey.
-            <span className="block mt-2 text-secondary font-semibold">BALANCE. GROWTH. CONNECTION.</span>
+            <span className="block mt-2 text-secondary font-semibold">ONE PLATFORM. ENDLESS POSSIBILITES.</span>
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">

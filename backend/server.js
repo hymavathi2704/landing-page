@@ -1,11 +1,11 @@
-// server.js (Refactored to use external model and mailer)
+// server.js
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config(); 
 
 const waitlistModel = require('./waitlistModel'); // Import database logic
-const mailer = require('./mailer'); // Import email logic <-- NEW
+// REMOVED: const mailer = require('./mailer'); // Import email logic
 
 const app = express();
 const PORT = process.env.PORT || 5000; 
@@ -38,11 +38,10 @@ app.post('/api/waitlist', async (req, res) => {
         console.log(`New waitlist entry recorded for ID: ${result.insertId}`);
 
         // 2. Send confirmation email (Mailer Logic)
-        // Note: We intentionally DO NOT 'await' the email sending strictly here
-        // to return the HTTP response faster. The mailer handles its own success/fail logging.
-        mailer.sendConfirmationEmail(email, name, role);
+        // REMOVED: mailer.sendConfirmationEmail(email, name, role);
 
-        res.status(201).json({ message: 'Success! Interest confirmed, recorded, and email initiated.' });
+        // Updated message to reflect email removal
+        res.status(201).json({ message: 'Success! Interest confirmed and recorded.' });
 
     } catch (error) {
         console.error('Waitlist submission failed:', error);

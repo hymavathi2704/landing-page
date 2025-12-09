@@ -8,109 +8,110 @@
 
 @layer base {
   :root {
-    /* Primary Colors */
-    --color-primary: #2D5D5D; /* teal-800 - Brand anchor + trust building */
-    --color-primary-foreground: #FFFFFF; /* white - Maximum contrast for readability */
+    /* Primary Colors (Light Blue - Based on Logo Circle) */
+    --color-primary: #337AB7; /* A bright, standard blue */
+    --color-primary-foreground: #FFFFFF; /* white */
     
-    /* Secondary Colors */
-    --color-secondary: #B8860B; /* darkgoldenrod - CTA power + premium highlights */
-    --color-secondary-foreground: #FFFFFF; /* white - Ensures WCAG AA contrast */
+    /* Secondary Colors (Dark Gray/Black - Based on Logo Text) */
+    --color-secondary: #2C3E50; /* Dark slate/navy */
+    --color-secondary-foreground: #FFFFFF; /* white */
     
-    /* Accent Colors */
-    --color-accent: #D4AF37; /* gold - Conversion moments + success states */
-    --color-accent-foreground: #1A1A1A; /* gray-900 - Dark text on gold background */
+    /* Accent Colors (A slightly softer blue for highlights/backgrounds) */
+    --color-accent: #5D9CEC; /* Lighter, contrasting blue */
+    --color-accent-foreground: #1A1A1A; /* Dark text on light accent background */
     
-    /* Background Colors */
-    --color-background: #F5F5DC; /* beige - Clean canvas for effortless scanning */
-    --color-foreground: #1A1A1A; /* gray-900 - Maximum contrast for scanning */
+    /* Background Colors (UPDATED: A very light, soft blue-gray) */
+    --color-background: #F0F4F7;
+    --color-foreground: #1A1A1A; /* dark text */
     
-    /* Surface Colors */
-    --color-card: #FFFFFF; /* white - Form fields + card separation */
-    --color-card-foreground: #1A1A1A; /* gray-900 - Primary text on cards */
+    /* Surface Colors (White cards will now stand out against the soft background) */
+    --color-card: #FFFFFF; /* white */
+    --color-card-foreground: #1A1A1A; /* dark text */
     
-    --color-popover: #FFFFFF; /* white - Dropdown backgrounds */
-    --color-popover-foreground: #1A1A1A; /* gray-900 - Dropdown text */
+    --color-popover: #FFFFFF; /* white */
+    --color-popover-foreground: #1A1A1A; /* gray-900 */
     
     /* Muted Colors */
-    --color-muted: #E5E5E5; /* gray-200 - Subtle backgrounds */
-    --color-muted-foreground: #4A4A4A; /* gray-600 - Supporting without distraction */
+    --color-muted: #E9ECEF; /* Soft gray */
+    --color-muted-foreground: #6C757D; /* Medium gray text */
     
     /* Border & Input */
-    --color-border: #E5E5E5; /* gray-200 - Form inputs only */
-    --color-input: #FFFFFF; /* white - Input field backgrounds */
-    --color-ring: #B8860B; /* darkgoldenrod - Focus ring color */
+    --color-border: #DEE2E6; /* Light border */
+    --color-input: #FFFFFF; /* white */
+    --color-ring: #337AB7; /* Primary blue focus ring */
     
     /* Semantic Colors */
-    --color-success: #228B22; /* forestgreen - Form completion + positive reinforcement */
-    --color-success-foreground: #FFFFFF; /* white - Text on success backgrounds */
+    --color-success: #28A745; /* Green */
+    --color-success-foreground: #FFFFFF;
     
-    --color-warning: #FF8C00; /* darkorange - Scarcity timers + urgency elements */
-    --color-warning-foreground: #FFFFFF; /* white - Text on warning backgrounds */
+    --color-warning: #FFC107; /* Yellow */
+    --color-warning-foreground: #1A1A1A;
     
-    --color-error: #DC143C; /* crimson - Form validation only */
-    --color-error-foreground: #FFFFFF; /* white - Text on error backgrounds */
+    --color-error: #DC3545; /* Red */
+    --color-error-foreground: #FFFFFF;
     
-    --color-destructive: #DC143C; /* crimson - Destructive actions */
-    --color-destructive-foreground: #FFFFFF; /* white - Text on destructive backgrounds */
+    --color-destructive: #DC3545;
+    --color-destructive-foreground: #FFFFFF;
     
     /* Typography */
     --font-headline: 'Montserrat', sans-serif;
     --font-body: 'Open Sans', sans-serif;
     --font-accent: 'Playfair Display', serif;
     
-    /* Shadows */
-    --shadow-cta: 0 4px 6px -1px rgba(45, 93, 93, 0.1);
-    --shadow-card: 0 2px 4px -1px rgba(45, 93, 93, 0.05);
+    /* Shadows - Updated to use Primary/Secondary colors for subtle shadow tint */
+    --shadow-cta: 0 4px 6px -1px rgba(44, 62, 80, 0.1);
+    --shadow-card: 0 2px 4px -1px rgba(51, 122, 183, 0.05);
     
     /* Border Radius */
     --radius: 0.5rem;
   }
 
+  /* Keeping Dark Mode styles separate, but adjusting them to be blue/gray as well */
   .dark {
     /* Primary Colors */
-    --color-primary: #3A7A7A; /* teal-700 - Lighter for dark mode */
-    --color-primary-foreground: #FFFFFF; /* white */
+    --color-primary: #5D9CEC; 
+    --color-primary-foreground: #FFFFFF;
     
     /* Secondary Colors */
-    --color-secondary: #D4AF37; /* gold - More visible in dark mode */
-    --color-secondary-foreground: #1A1A1A; /* gray-900 */
+    --color-secondary: #BDC3C7; /* Lighter secondary for dark mode contrast */
+    --color-secondary-foreground: #1A1A1A; 
     
     /* Accent Colors */
-    --color-accent: #E5C158; /* lightgold - Brighter for dark mode */
-    --color-accent-foreground: #1A1A1A; /* gray-900 */
+    --color-accent: #337AB7; 
+    --color-accent-foreground: #FFFFFF;
     
     /* Background Colors */
-    --color-background: #0A0A0A; /* gray-950 - Dark background */
-    --color-foreground: #F5F5F5; /* gray-100 - Light text */
+    --color-background: #1A1A1A;
+    --color-foreground: #F8F9FA; 
     
     /* Surface Colors */
-    --color-card: #1A1A1A; /* gray-900 - Dark cards */
-    --color-card-foreground: #F5F5F5; /* gray-100 */
+    --color-card: #212529; /* Dark card */
+    --color-card-foreground: #F8F9FA;
     
-    --color-popover: #1A1A1A; /* gray-900 */
-    --color-popover-foreground: #F5F5F5; /* gray-100 */
+    --color-popover: #212529;
+    --color-popover-foreground: #F8F9FA;
     
     /* Muted Colors */
-    --color-muted: #2A2A2A; /* gray-800 */
-    --color-muted-foreground: #A0A0A0; /* gray-400 */
+    --color-muted: #343A40; 
+    --color-muted-foreground: #ADB5BD; 
     
     /* Border & Input */
-    --color-border: #2A2A2A; /* gray-800 */
-    --color-input: #1A1A1A; /* gray-900 */
-    --color-ring: #D4AF37; /* gold */
+    --color-border: #495057; 
+    --color-input: #212529; 
+    --color-ring: #5D9CEC; 
     
     /* Semantic Colors */
-    --color-success: #2ECC71; /* emerald - Brighter for dark mode */
-    --color-success-foreground: #FFFFFF; /* white */
+    --color-success: #2ECC71; 
+    --color-success-foreground: #FFFFFF;
     
-    --color-warning: #FFA500; /* orange - More visible */
-    --color-warning-foreground: #1A1A1A; /* gray-900 */
+    --color-warning: #F1C40F; 
+    --color-warning-foreground: #1A1A1A;
     
-    --color-error: #E74C3C; /* red - Softer for dark mode */
-    --color-error-foreground: #FFFFFF; /* white */
+    --color-error: #E74C3C; 
+    --color-error-foreground: #FFFFFF;
     
-    --color-destructive: #E74C3C; /* red */
-    --color-destructive-foreground: #FFFFFF; /* white */
+    --color-destructive: #E74C3C; 
+    --color-destructive-foreground: #FFFFFF;
   }
 }
 

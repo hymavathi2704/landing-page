@@ -3,7 +3,7 @@ import Icon from '../../../components/ui/AppIcon';
 import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
 import { Checkbox } from '../../../components/ui/Checkbox';
-import axios from 'axios'; // <-- ADDED: Import Axios for API calls
+import axios from 'axios'; 
 
 const WaitlistSection = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +17,8 @@ const WaitlistSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  // NEW STATE: Controls the visibility of the pop-up form
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
   const validateForm = () => {
     const newErrors = {};
@@ -76,9 +78,11 @@ const WaitlistSection = () => {
         submit: '' // Clear submission error on role change
       }));
     }
+    // NEW: Open the modal pop-up immediately after selecting the role
+    setIsModalOpen(true);
   };
 
-  // <-- UPDATED: Use Axios to connect to the backend API -->
+
   const handleSubmit = async (e) => {
     e?.preventDefault();
 
@@ -99,6 +103,8 @@ const WaitlistSection = () => {
 
       setIsSubmitted(true);
       localStorage.setItem('equibudx_user_role', formData?.role);
+      // NEW: Close modal on successful submission
+      setIsModalOpen(false); 
 
     } catch (error) {
       console.error('Waitlist submission failed:', error);
@@ -126,7 +132,6 @@ const WaitlistSection = () => {
       setIsSubmitting(false);
     }
   };
-  // <-- END UPDATED handleSubmit -->
 
 
   if (isSubmitted) {
@@ -143,7 +148,7 @@ const WaitlistSection = () => {
             </h2>
 
             <p className="font-body text-lg text-muted-foreground mb-6">
-              Check your email at <span className="font-semibold text-foreground">{formData?.email}</span> for your confirmation and future updates.
+              Thank you for registering your interest! You will receive future updates.
             </p>
 
             <div className="bg-background rounded-lg p-6 mb-6">
@@ -152,15 +157,9 @@ const WaitlistSection = () => {
               </h3>
               <div className="space-y-3 text-left">
                 <div className="flex items-start gap-3">
-                  <Icon name="Mail" size={20} color="var(--color-primary)" className="mt-1 flex-shrink-0" />
-                  <p className="font-body text-foreground">
-                    <span className="font-semibold">Confirmation Email:</span> Arriving in your inbox within 5 minutes
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
                   <Icon name="Calendar" size={20} color="var(--color-secondary)" className="mt-1 flex-shrink-0" />
                   <p className="font-body text-foreground">
-                    <span className="font-semibold">Launch Updates:</span> Weekly progress reports on platform development
+                    <span className="font-semibold">Launch Updates:</span> Regular progress reports on platform development
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
@@ -225,22 +224,24 @@ const WaitlistSection = () => {
         </div>
 
         <div className="bg-card rounded-2xl p-6 lg:p-8 shadow-cta">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Form wrapper is kept here only for the role selection and errors */}
+          <div className="space-y-6">
             <div className="mb-6">
               <p className="font-body text-sm text-muted-foreground mb-4 text-center">
                 I'm interested as a:
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
-                <button
-                  type="button"
+                
+                {/* Coach Role Selection Card */}
+                <div
                   onClick={() => handleRoleSelect('coach')}
-                  className={`p-6 rounded-xl border-2 transition-all duration-200 ${
+                  className={`relative p-6 rounded-xl border-2 transition-all duration-200 cursor-pointer group ${
                     formData?.role === 'coach' ?'border-primary bg-primary/5 shadow-cta' :'border-border hover:border-muted'
                   }`}
                 >
                   <div className="flex flex-col items-center gap-3">
                     <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                      formData?.role === 'coach' ? 'bg-primary/10' : 'bg-muted'
+                      formData?.role === 'coach' ? 'bg-primary/10' : 'bg-muted group-hover:bg-primary/5'
                     }`}>
                       <Icon name="Users" size={32} color={formData?.role === 'coach' ? 'var(--color-primary)' : 'var(--color-muted-foreground)'} />
                     </div>
@@ -248,19 +249,25 @@ const WaitlistSection = () => {
                       <p className="font-headline font-bold text-lg text-foreground">Coach</p>
                       <p className="font-body text-sm text-muted-foreground">Fair fees, equal support</p>
                     </div>
+                    {/* Checkbox-style indicator for Coach */}
+                    <div className={`absolute top-3 right-3 h-5 w-5 rounded-sm border-2 flex items-center justify-center transition-colors duration-200 ${
+                       formData?.role === 'coach' ? 'bg-primary border-primary' : 'bg-card border-border group-hover:border-primary'
+                    }`}>
+                      {formData?.role === 'coach' && <Icon name="Check" size={14} color="var(--color-primary-foreground)" />}
+                    </div>
                   </div>
-                </button>
+                </div>
 
-                <button
-                  type="button"
+                {/* Client Role Selection Card */}
+                <div
                   onClick={() => handleRoleSelect('client')}
-                  className={`p-6 rounded-xl border-2 transition-all duration-200 ${
+                  className={`relative p-6 rounded-xl border-2 transition-all duration-200 cursor-pointer group ${
                     formData?.role === 'client' ?'border-secondary bg-secondary/5 shadow-cta' :'border-border hover:border-muted'
                   }`}
                 >
                   <div className="flex flex-col items-center gap-3">
                     <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                      formData?.role === 'client' ? 'bg-secondary/10' : 'bg-muted'
+                      formData?.role === 'client' ? 'bg-secondary/10' : 'bg-muted group-hover:bg-secondary/5'
                     }`}>
                       <Icon name="User" size={32} color={formData?.role === 'client' ? 'var(--color-secondary)' : 'var(--color-muted-foreground)'} />
                     </div>
@@ -268,22 +275,62 @@ const WaitlistSection = () => {
                       <p className="font-headline font-bold text-lg text-foreground">Client</p>
                       <p className="font-body text-sm text-muted-foreground">Authentic growth awaits</p>
                     </div>
+                     {/* Checkbox-style indicator for Client */}
+                    <div className={`absolute top-3 right-3 h-5 w-5 rounded-sm border-2 flex items-center justify-center transition-colors duration-200 ${
+                       formData?.role === 'client' ? 'bg-secondary border-secondary' : 'bg-card border-border group-hover:border-secondary'
+                    }`}>
+                      {formData?.role === 'client' && <Icon name="Check" size={14} color="var(--color-secondary-foreground)" />}
+                    </div>
                   </div>
-                </button>
+                </div>
               </div>
               {errors?.role && (
                 <p className="mt-2 text-sm text-error text-center">{errors?.role}</p>
               )}
             </div>
+            
+            {/* Display guidance text if no role is selected */}
+            {!formData?.role && (
+              <div className="bg-accent/10 rounded-lg p-4 mb-4 text-center animate-fade-in">
+                <p className="font-body text-sm text-foreground">
+                  Select your role (Coach or Client) above to proceed and join the waitlist!
+                </p>
+              </div>
+            )}
+          </div>
+          
+        </div>
+        
+        {/* NEW: Modal Pop-up for the rest of the form */}
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/50 backdrop-blur-sm animate-fade-in">
+            <div className="relative bg-card rounded-2xl shadow-cta max-w-lg w-full mx-4 p-6 lg:p-8 animate-slide-up max-h-[90vh] overflow-y-auto">
+              
+              {/* Close Button */}
+              <button
+                onClick={() => {
+                  setIsModalOpen(false);
+                  // Optional: Clear role and form data when closing without submitting
+                  setFormData(prev => ({ name: '', email: '', phone: '', role: '', notes: '' })); 
+                  setAgreedToTerms(false);
+                  setErrors({});
+                }}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors duration-200"
+                aria-label="Close modal"
+              >
+                <Icon name="X" size={24} />
+              </button>
 
-            {formData?.role && (
-              <div className="space-y-4 animate-fade-in">
-                <div className="bg-accent/10 rounded-lg p-4 mb-4">
-                  <p className="font-body text-sm text-foreground text-center">
-                    Thank you for showing interest! We will keep you updated on our progress and launch date.
-                  </p>
-                </div>
-
+              <h3 className="font-headline font-bold text-2xl text-foreground mb-4 text-center">
+                Complete Your Interest Form
+              </h3>
+              <p className="font-body text-center text-muted-foreground mb-6">
+                You selected: <span className="capitalize font-semibold text-primary">{formData?.role}</span>. Complete your profile to secure your spot.
+              </p>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                
+                {/* Form Fields - Moved from the inline section */}
                 <Input
                   type="text"
                   label="Full Name"
@@ -349,7 +396,6 @@ const WaitlistSection = () => {
                   />
                 </div>
                 
-                {/* ADDED: Display submission error message */}
                 {errors?.submit && (
                   <p className="mt-2 text-sm text-error text-center">{errors?.submit}</p>
                 )}
@@ -370,10 +416,10 @@ const WaitlistSection = () => {
                 <p className="text-center font-body text-xs text-muted-foreground">
                   By submitting your information, you agree to our Terms of Service and Privacy Policy
                 </p>
-              </div>
-            )}
-          </form>
-        </div>
+              </form>
+            </div>
+          </div>
+        )}
 
         <div className="mt-8 grid sm:grid-cols-3 gap-4">
           <div className="bg-card rounded-lg p-4 text-center">

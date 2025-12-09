@@ -54,18 +54,20 @@ const FooterSection = () => {
             The coaching platform built on perfect equilibrium. Where coaches and clients bloom together through balanced, authentic relationships.
           </p>
           <p className="font-headline font-semibold text-sm text-secondary mb-4">
-            BALANCE. GROWTH. CONNECTION.
+            ONE PLATFORM. ENDLESS POSSIBILITES.
           </p>
-          {/* Social Links restored */}
+          {/* Social Links updated with hover effect */}
           <div className="flex gap-3 justify-center">
             {socialLinks?.map((social) => (
               <a
                 key={social?.icon}
                 href={social?.href}
                 aria-label={social?.label}
-                className="w-10 h-10 rounded-full bg-background hover:bg-primary/10 flex items-center justify-center transition-colors duration-200"
+                // UPDATED: Added hover:bg-primary/20 and hover:text-primary for a strong visual response
+                className="w-12 h-12 rounded-full bg-background hover:bg-primary/20 hover:text-primary flex items-center justify-center transition-colors duration-200"
               >
-                <Icon name={social?.icon} size={20} color="var(--color-foreground)" />
+                {/* UPDATED: Changed fixed color to "currentColor" so it inherits the hover color */}
+                <Icon name={social?.icon} size={28} color="currentColor" />
               </a>
             ))}
           </div>
