@@ -5,6 +5,11 @@ import ErrorBoundary from "components/ErrorBoundary";
 import NotFound from "pages/NotFound";
 import LandingPage from './pages/landing-page';
 
+// Import new legal pages
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import RefundAndCancellationPolicy from './pages/RefundAndCancellationPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
+
 const Routes = () => {
   return (
     <BrowserRouter>
@@ -15,6 +20,12 @@ const Routes = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="*" element={<NotFound />} />
+        
+        {/* NEW LEGAL ROUTES */}
+        <Route path="/Privacy Policy" element={<PrivacyPolicy />} />
+        <Route path="/Refund and Cancellation Policy" element={<RefundAndCancellationPolicy />} />
+        <Route path="/Terms and Conditions" element={<TermsAndConditions />} />
+
       </RouterRoutes>
       </ErrorBoundary>
     </BrowserRouter>

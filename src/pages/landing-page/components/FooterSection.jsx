@@ -9,7 +9,12 @@ const FooterSection = () => {
     platform: [],
     company: [],
     resources: [],
-    legal: []
+    // UPDATED: Legal links pointing to new page routes
+    legal: [
+        { label: 'Privacy Policy', href: '/Privacy Policy' }, 
+        { label: 'Terms and Conditions', href: '/Terms and Conditions' }, 
+        { label: 'Refund and Cancellation Policy', href: '/Refund and Cancellation Policy' } 
+    ]
   };
 
   // Restored social links per user request
@@ -40,39 +45,54 @@ const FooterSection = () => {
     <footer className="bg-card border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         
-        {/*
-          Removed the grid structure and all navigation columns, focusing only on the main branding text.
-        */}
-        <div className="mb-12 max-w-2xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-              <Icon name="Scale" size={20} color="var(--color-primary)" />
+        <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-12 mb-12">
+            
+            {/* Branding, Tagline, and Social Links (Left/Center) */}
+            <div className="max-w-md text-center md:text-left md:flex-1">
+              <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Icon name="Scale" size={20} color="var(--color-primary)" />
+                </div>
+                <span className="font-headline font-bold text-xl text-primary">Equibudx</span>
+              </div>
+              <p className="font-headline font-semibold text-sm text-secondary mb-4">
+                ONE PLATFORM. ENDLESS POSSIBILITES.
+              </p>
+              {/* Social Links updated with hover effect */}
+              <div className="flex gap-3 justify-center md:justify-start">
+                {socialLinks?.map((social) => (
+                  <a
+                    key={social?.icon}
+                    href={social?.href}
+                    aria-label={social?.label}
+                    className="w-12 h-12 rounded-full bg-background hover:bg-primary/20 hover:text-primary flex items-center justify-center transition-colors duration-200"
+                  >
+                    <Icon name={social?.icon} size={28} color="currentColor" />
+                  </a>
+                ))}
+              </div>
             </div>
-            <span className="font-headline font-bold text-xl text-primary">Equibudx</span>
-          </div>
-          <p className="font-body text-muted-foreground mb-4 leading-relaxed">
-            The coaching platform built on perfect equilibrium. Where coaches and clients bloom together through balanced, authentic relationships.
-          </p>
-          <p className="font-headline font-semibold text-sm text-secondary mb-4">
-            ONE PLATFORM. ENDLESS POSSIBILITES.
-          </p>
-          {/* Social Links updated with hover effect */}
-          <div className="flex gap-3 justify-center">
-            {socialLinks?.map((social) => (
-              <a
-                key={social?.icon}
-                href={social?.href}
-                aria-label={social?.label}
-                // UPDATED: Added hover:bg-primary/20 and hover:text-primary for a strong visual response
-                className="w-12 h-12 rounded-full bg-background hover:bg-primary/20 hover:text-primary flex items-center justify-center transition-colors duration-200"
-              >
-                {/* UPDATED: Changed fixed color to "currentColor" so it inherits the hover color */}
-                <Icon name={social?.icon} size={28} color="currentColor" />
-              </a>
-            ))}
-          </div>
+
+            {/* Legal Links Section (Stacked) */}
+            <div className="md:w-auto w-full text-center md:text-left pt-6 md:pt-0">
+                <h4 className="font-headline font-bold text-lg text-foreground mb-4">
+                    Legal
+                </h4>
+                <div className="flex flex-col items-center md:items-start space-y-3">
+                    {footerLinks.legal.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        className="font-body text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                </div>
+            </div>
+
         </div>
-        
+
         {/* Copyright and Legal Badges Section */}
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
