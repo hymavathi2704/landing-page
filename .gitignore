@@ -6,3 +6,6 @@ package-lock.json
 .vscode/
 .idea/
 vite.config.*s.*
+
+# Ignore the .env file in the backend folder
+backend/.env
