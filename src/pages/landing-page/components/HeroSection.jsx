@@ -75,7 +75,26 @@ const HeroSection = () => {
             <span className="block mt-2 text-secondary font-semibold">ONE PLATFORM. ENDLESS POSSIBILITES.</span>
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          {/* Modified content to keep human logos but replace count with "Coming Soon" text */}
+          {/* START: MOVED 'Coming Soon' BADGE UP AND ADDED mb-6 */}
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-card rounded-full shadow-card mb-6">
+            <div className="flex -space-x-2">
+              <div className="w-8 h-8 rounded-full bg-primary/20 border-2 border-card flex items-center justify-center">
+                <Icon name="Users" size={16} color="var(--color-primary)" />
+              </div>
+              <div className="w-8 h-8 rounded-full bg-secondary/20 border-2 border-card flex items-center justify-center">
+                <Icon name="User" size={16} color="var(--color-secondary)" />
+              </div>
+            </div>
+            <div className="text-left">
+              <p className="font-headline font-bold text-2xl text-foreground">Coming Soon</p>
+              <p className="font-body text-xs text-muted-foreground">The balanced coaching platform</p>
+            </div>
+          </div>
+          {/* END: MOVED 'Coming Soon' BADGE UP */}
+          
+          {/* START: MOVED 'Join the Waitlist' BUTTON GROUP DOWN AND REMOVED mb-12 */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               variant="default"
               size="lg"
@@ -98,22 +117,8 @@ const HeroSection = () => {
             </Button>
             */}
           </div>
+          {/* END: MOVED 'Join the Waitlist' BUTTON GROUP DOWN */}
 
-          {/* Modified content to keep human logos but replace count with "Coming Soon" text */}
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-card rounded-full shadow-card">
-            <div className="flex -space-x-2">
-              <div className="w-8 h-8 rounded-full bg-primary/20 border-2 border-card flex items-center justify-center">
-                <Icon name="Users" size={16} color="var(--color-primary)" />
-              </div>
-              <div className="w-8 h-8 rounded-full bg-secondary/20 border-2 border-card flex items-center justify-center">
-                <Icon name="User" size={16} color="var(--color-secondary)" />
-              </div>
-            </div>
-            <div className="text-left">
-              <p className="font-headline font-bold text-2xl text-foreground">Coming Soon</p>
-              <p className="font-body text-xs text-muted-foreground">The balanced coaching platform</p>
-            </div>
-          </div>
         </div>
       </div>
       {/* Removed the animated scrolling arrow below the Coming Soon section */}
