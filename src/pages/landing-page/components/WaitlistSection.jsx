@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/ui/AppIcon';
 import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
 import { Checkbox } from '../../../components/ui/Checkbox';
 import axios from 'axios'; 
 
-const WaitlistSection = () => {
+// ACCEPT NEW PROPS: initialOpen controls the visibility of the Role Selection Modal
+const WaitlistSection = ({ initialOpen, setInitialOpen }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,8 +18,18 @@ const WaitlistSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  // NEW STATE: Controls the visibility of the pop-up form
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  // Renamed old state to control step 2 (Form Modal)
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false); 
+  // NEW STATE: Controls the visibility of the initial pop-up (Step 1)
+  const [isRoleSelectionModalOpen, setIsRoleSelectionModalOpen] = useState(false);
+
+  // Sync state with parent component prop
+  useEffect(() => {
+    if (initialOpen !== undefined) {
+      setIsRoleSelectionModalOpen(initialOpen);
+    }
+  }, [initialOpen]);
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -38,8 +49,9 @@ const WaitlistSection = () => {
         newErrors.phone = 'Please enter a valid phone number';
     }
 
+    // Role validation is still needed for the form submit, though role is selected in step 1
     if (!formData?.role) {
-      newErrors.role = 'Please select your role';
+      newErrors.role = 'Role is required'; 
     }
 
     if (!agreedToTerms) {
@@ -78,8 +90,10 @@ const WaitlistSection = () => {
         submit: '' // Clear submission error on role change
       }));
     }
-    // NEW: Open the modal pop-up immediately after selecting the role
-    setIsModalOpen(true);
+    // Step 1 COMPLETE: Close the role modal and IMMEDIATELY open the form modal (Step 2)
+    setIsRoleSelectionModalOpen(false);
+    setInitialOpen(false); // Update parent state
+    setIsFormModalOpen(true);
   };
 
 
@@ -101,10 +115,10 @@ const WaitlistSection = () => {
       // API call to the Node.js backend running on port 5000
       await axios.post('http://localhost:5000/api/waitlist', formData);
 
+      // Step 2 COMPLETE: Close form and open success (Step 3)
       setIsSubmitted(true);
       localStorage.setItem('equibudx_user_role', formData?.role);
-      // NEW: Close modal on successful submission
-      setIsModalOpen(false); 
+      setIsFormModalOpen(false); 
 
     } catch (error) {
       console.error('Waitlist submission failed:', error);
@@ -134,11 +148,14 @@ const WaitlistSection = () => {
   };
 
 
+  // --- Step 3: Submission Success (isSubmitted is TRUE) - NOW A MODAL ---
   if (isSubmitted) {
     return (
-      <section id="waitlist" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-card rounded-2xl p-8 lg:p-12 shadow-cta text-center">
+      <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/50 backdrop-blur-sm animate-fade-in">
+        <div className="relative bg-card rounded-2xl shadow-cta max-w-lg w-full mx-4 p-8 lg:p-12 animate-slide-up text-center">
+            
+            {/* Note: Close button removed for the success state as per image_84eb3a.png design */}
+
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-success/10 flex items-center justify-center animate-bounce">
               <Icon name="Check" size={40} color="var(--color-success)" />
             </div>
@@ -174,12 +191,15 @@ const WaitlistSection = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 variant="default"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                onClick={() => {
+                    setIsSubmitted(false); 
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 iconName="ArrowUp"
                 iconPosition="left"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
-                Back to Top
+                Back to Home
               </Button>
               <Button
                 variant="outline"
@@ -193,6 +213,7 @@ const WaitlistSection = () => {
                     notes: ''
                   });
                   setAgreedToTerms(false);
+                  setIsRoleSelectionModalOpen(true); // Restart the flow 
                 }}
                 iconName="RefreshCw"
                 iconPosition="left"
@@ -200,37 +221,47 @@ const WaitlistSection = () => {
                 Submit Another
               </Button>
             </div>
-          </div>
         </div>
-      </section>
+      </div>
     );
+  }
+
+  // Hide the on-page Waitlist Section when it's not the success state
+  // This ensures the page is clean and the flow is modal-driven.
+  if (!isRoleSelectionModalOpen && !isFormModalOpen) {
+      // Return a minimal section to maintain the scroll target (#waitlist)
+      return <section id="waitlist" className="py-1 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5" aria-hidden="true" />;
   }
 
   return (
     <section id="waitlist" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-4">
-            <Icon name="Rocket" size={20} color="var(--color-accent)" />
-            <span className="font-body text-sm font-semibold text-accent-foreground">Future Platform Access</span>
-          </div>
-          <h2 className="font-headline font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">
-            Show Your
-            <span className="block text-primary mt-2">Interest & Join For Updates</span>
-          </h2>
-          <p className="font-body text-lg text-muted-foreground max-w-2xl mx-auto">
-            Be the first to know when the balanced coaching platform launches
-          </p>
-        </div>
+      
+      {/* Step 1: Role Selection Modal */}
+      {isRoleSelectionModalOpen && (
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/50 backdrop-blur-sm animate-fade-in">
+          <div className="relative bg-card rounded-2xl shadow-cta max-w-xl w-full mx-4 p-6 lg:p-8 animate-slide-up max-h-[90vh] overflow-y-auto">
+            
+            {/* Close Button */}
+            <button
+              onClick={() => {
+                setIsRoleSelectionModalOpen(false);
+                setInitialOpen(false); // Update parent state
+                setFormData({ name: '', email: '', phone: '', role: '', notes: '' });
+              }}
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors duration-200"
+              aria-label="Close modal"
+            >
+              <Icon name="X" size={24} />
+            </button>
 
-        <div className="bg-card rounded-2xl p-6 lg:p-8 shadow-cta">
-          {/* Form wrapper is kept here only for the role selection and errors */}
-          <div className="space-y-6">
-            <div className="mb-6">
-              <p className="font-body text-sm text-muted-foreground mb-4 text-center">
-                I'm interested as a:
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4">
+            <h3 className="font-headline font-bold text-3xl text-foreground mb-4 text-center">
+              Start Your Journey
+            </h3>
+            <p className="font-body text-center text-muted-foreground mb-6">
+              Tell us who you are so we can tailor your experience.
+            </p>
+            
+            <div className="grid sm:grid-cols-2 gap-4">
                 
                 {/* Coach Role Selection Card */}
                 <div
@@ -284,32 +315,19 @@ const WaitlistSection = () => {
                   </div>
                 </div>
               </div>
-              {errors?.role && (
-                <p className="mt-2 text-sm text-error text-center">{errors?.role}</p>
-              )}
-            </div>
-            
-            {/* Display guidance text if no role is selected */}
-            {!formData?.role && (
-              <div className="bg-accent/10 rounded-lg p-4 mb-4 text-center animate-fade-in">
-                <p className="font-body text-sm text-foreground">
-                  Select your role (Coach or Client) above to proceed and join the waitlist!
-                </p>
-              </div>
-            )}
           </div>
-          
         </div>
-        
-        {/* NEW: Modal Pop-up for the rest of the form */}
-        {isModalOpen && (
+      )}
+      
+      {/* Step 2: Form Modal (previously inline, now controlled by isFormModalOpen) */}
+      {isFormModalOpen && (
           <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/50 backdrop-blur-sm animate-fade-in">
             <div className="relative bg-card rounded-2xl shadow-cta max-w-lg w-full mx-4 p-6 lg:p-8 animate-slide-up max-h-[90vh] overflow-y-auto">
               
               {/* Close Button */}
               <button
                 onClick={() => {
-                  setIsModalOpen(false);
+                  setIsFormModalOpen(false);
                   // Optional: Clear role and form data when closing without submitting
                   setFormData(prev => ({ name: '', email: '', phone: '', role: '', notes: '' })); 
                   setAgreedToTerms(false);
@@ -420,7 +438,12 @@ const WaitlistSection = () => {
             </div>
           </div>
         )}
-
+      
+      {/* Retained the general structure but the content is now inside modals */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Removed inline role selection and guidance text */}
+        
         <div className="mt-8 grid sm:grid-cols-3 gap-4">
           <div className="bg-card rounded-lg p-4 text-center">
             <Icon name="Shield" size={24} color="var(--color-primary)" className="mx-auto mb-2" />

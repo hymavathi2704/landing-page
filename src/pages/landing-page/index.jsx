@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react'; // Added useState
 import HeaderNavigation from '../../components/navigation/HeaderNavigation';
 import ExitIntentModal from '../../components/navigation/ExitIntentModal';
 import HeroSection from './components/HeroSection';
@@ -12,6 +12,8 @@ import WaitlistSection from './components/WaitlistSection';
 import FooterSection from './components/FooterSection';
 
 const LandingPage = () => {
+  const [isRoleSelectionOpen, setIsRoleSelectionOpen] = useState(false); // NEW STATE for initial modal
+
   useEffect(() => {
     document.title = 'Equibudx - Where Coaches and Clients Bloom Together';
     
@@ -27,9 +29,15 @@ const LandingPage = () => {
       <ExitIntentModal />
       
       <main>
-        <HeroSection />
-        {/* Keeping only the WaitlistSection in the middle */}
-        <WaitlistSection />
+        {/* Pass the state control down to the WaitlistSection */}
+        <WaitlistSection 
+          initialOpen={isRoleSelectionOpen} 
+          setInitialOpen={setIsRoleSelectionOpen} 
+        />
+        
+        {/* Pass the handler to HeroSection to open the waitlist modal */}
+        <HeroSection onOpenWaitlist={() => setIsRoleSelectionOpen(true)} />
+
       </main>
 
       <FooterSection />

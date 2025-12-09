@@ -28,14 +28,11 @@ app.post('/api/waitlist', async (req, res) => {
     }
 
     try {
-        // 1. Check for duplicate email and create entry (DB Logic)
-        const existingEntry = await waitlistModel.findByEmail(email);
-        if (existingEntry) {
-            return res.status(409).json({ message: 'Email address is already on the waitlist. Thank you for your continued interest!' });
-        }
+        // 1. Create entry directly (Removed explicit email duplication check
+        // to allow users to register for multiple roles with the same email.)
 
         const result = await waitlistModel.createEntry({ name, email, phone, role, notes });
-        console.log(`New waitlist entry recorded for ID: ${result.insertId}`);
+        console.log(`New waitlist entry recorded for ID: ${result.insertId} with role: ${role}`);
 
         // 2. Send confirmation email (Mailer Logic)
         // REMOVED: mailer.sendConfirmationEmail(email, name, role);

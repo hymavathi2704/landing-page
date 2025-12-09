@@ -4,7 +4,8 @@ import Button from '../../../components/ui/Button';
 
 // The EquibudxLogoSVG component has been removed for cleaner asset management.
 
-const HeroSection = () => {
+// NEW PROP: Accept a handler to open the waitlist from the parent
+const HeroSection = ({ onOpenWaitlist }) => {
   const [waitlistCount, setWaitlistCount] = useState(1247);
   const [isLogoAnimated, setIsLogoAnimated] = useState(false);
 
@@ -17,17 +18,7 @@ const HeroSection = () => {
     // return () => clearInterval(interval);
   }, []);
 
-  const scrollToWaitlist = () => {
-    const element = document.getElementById('waitlist');
-    if (element) {
-      const elementPosition = element?.getBoundingClientRect()?.top + window.pageYOffset;
-      const offsetPosition = elementPosition - 80;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
+  // Removed scrollToWaitlist function as we now use onOpenWaitlist prop
 
   const scrollToVision = () => {
     const element = document.getElementById('vision');
@@ -74,8 +65,7 @@ const HeroSection = () => {
             The only platform treating everyone as equals in your growth journey.
             <span className="block mt-2 text-secondary font-semibold">ONE PLATFORM. ENDLESS POSSIBILITES.</span>
           </p>
-
-          {/* Modified content to keep human logos but replace count with "Coming Soon" text */}
+          
           {/* START: MOVED 'Coming Soon' BADGE UP AND ADDED mb-6 */}
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-card rounded-full shadow-card mb-6">
             <div className="flex -space-x-2">
@@ -93,17 +83,19 @@ const HeroSection = () => {
           </div>
           {/* END: MOVED 'Coming Soon' BADGE UP */}
           
-          {/* START: MOVED 'Join the Waitlist' BUTTON GROUP DOWN AND REMOVED mb-12 */}
+          {/* START: MOVED 'Join the Waitlist' BUTTON GROUP DOWN, REMOVED mb-12, AND UPDATED BUTTON STYLE/HANDLER */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
+              // HIGHLIGHTED: Changed to 'default' (primary) variant, size 'xl' 
               variant="default"
-              size="lg"
-              onClick={scrollToWaitlist}
+              size="xl"
+              onClick={onOpenWaitlist} // Use the prop handler to open the modal
               iconName="ArrowRight"
               iconPosition="right"
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-cta w-full sm:w-auto"
+              // Added shadow-cta-lg for visual punch (assuming this class exists or is fine)
+              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cta w-full sm:w-auto font-extrabold tracking-wide" 
             >
-              Join the Waitlist
+              Join The Waitlist Now!
             </Button>
             {/* <Button
               variant="outline"
