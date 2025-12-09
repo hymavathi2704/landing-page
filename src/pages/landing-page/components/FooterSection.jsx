@@ -4,33 +4,15 @@ import Icon from '../../../components/ui/AppIcon';
 const FooterSection = () => {
   const currentYear = new Date()?.getFullYear();
 
+  // All link data is intentionally empty or commented out per user request for simplification.
   const footerLinks = {
-    platform: [
-      { label: 'How It Works', href: '#how-it-works' },
-      { label: 'For Coaches', href: '#waitlist' },
-      { label: 'For Clients', href: '#waitlist' },
-      { label: 'Pricing', href: '#faq' }
-    ],
-    company: [
-      { label: 'About Us', href: '#vision' },
-      { label: 'Our Mission', href: '#vision' },
-      { label: 'Launch Timeline', href: '#faq' },
-      { label: 'Contact', href: '#waitlist' }
-    ],
-    resources: [
-      { label: 'FAQ', href: '#faq' },
-      { label: 'Blog', href: '#waitlist' },
-      { label: 'Support', href: '#waitlist' },
-      { label: 'Community', href: '#waitlist' }
-    ],
-    legal: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Service', href: '#' },
-      { label: 'Cookie Policy', href: '#' },
-      { label: 'GDPR', href: '#' }
-    ]
+    platform: [],
+    company: [],
+    resources: [],
+    legal: []
   };
 
+  // Restored social links per user request
   const socialLinks = [
     { icon: 'Twitter', href: '#', label: 'Twitter' },
     { icon: 'Linkedin', href: '#', label: 'LinkedIn' },
@@ -38,6 +20,7 @@ const FooterSection = () => {
     { icon: 'Instagram', href: '#', label: 'Instagram' }
   ];
 
+  // Anchor click handler is no longer strictly needed but kept for code safety if links are restored
   const handleLinkClick = (e, href) => {
     if (href?.startsWith('#')) {
       e?.preventDefault();
@@ -56,102 +39,39 @@ const FooterSection = () => {
   return (
     <footer className="bg-card border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
-          <div className="col-span-2 md:col-span-3 lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <Icon name="Scale" size={20} color="var(--color-primary)" />
-              </div>
-              <span className="font-headline font-bold text-xl text-primary">Equibudx</span>
+        
+        {/*
+          Removed the grid structure and all navigation columns, focusing only on the main branding text.
+        */}
+        <div className="mb-12 max-w-2xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <Icon name="Scale" size={20} color="var(--color-primary)" />
             </div>
-            <p className="font-body text-muted-foreground mb-4 leading-relaxed">
-              The coaching platform built on perfect equilibrium. Where coaches and clients bloom together through balanced, authentic relationships.
-            </p>
-            <p className="font-headline font-semibold text-sm text-secondary mb-4">
-              BALANCE. GROWTH. CONNECTION.
-            </p>
-            <div className="flex gap-3">
-              {socialLinks?.map((social) => (
-                <a
-                  key={social?.icon}
-                  href={social?.href}
-                  aria-label={social?.label}
-                  className="w-10 h-10 rounded-full bg-background hover:bg-primary/10 flex items-center justify-center transition-colors duration-200"
-                >
-                  <Icon name={social?.icon} size={20} color="var(--color-foreground)" />
-                </a>
-              ))}
-            </div>
+            <span className="font-headline font-bold text-xl text-primary">Equibudx</span>
           </div>
-
-          <div>
-            <h3 className="font-headline font-bold text-foreground mb-4">Platform</h3>
-            <ul className="space-y-2">
-              {footerLinks?.platform?.map((link) => (
-                <li key={link?.label}>
-                  <a
-                    href={link?.href}
-                    onClick={(e) => handleLinkClick(e, link?.href)}
-                    className="font-body text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-                  >
-                    {link?.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-headline font-bold text-foreground mb-4">Company</h3>
-            <ul className="space-y-2">
-              {footerLinks?.company?.map((link) => (
-                <li key={link?.label}>
-                  <a
-                    href={link?.href}
-                    onClick={(e) => handleLinkClick(e, link?.href)}
-                    className="font-body text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-                  >
-                    {link?.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-headline font-bold text-foreground mb-4">Resources</h3>
-            <ul className="space-y-2">
-              {footerLinks?.resources?.map((link) => (
-                <li key={link?.label}>
-                  <a
-                    href={link?.href}
-                    onClick={(e) => handleLinkClick(e, link?.href)}
-                    className="font-body text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-                  >
-                    {link?.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-headline font-bold text-foreground mb-4">Legal</h3>
-            <ul className="space-y-2">
-              {footerLinks?.legal?.map((link) => (
-                <li key={link?.label}>
-                  <a
-                    href={link?.href}
-                    className="font-body text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-                  >
-                    {link?.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <p className="font-body text-muted-foreground mb-4 leading-relaxed">
+            The coaching platform built on perfect equilibrium. Where coaches and clients bloom together through balanced, authentic relationships.
+          </p>
+          <p className="font-headline font-semibold text-sm text-secondary mb-4">
+            BALANCE. GROWTH. CONNECTION.
+          </p>
+          {/* Social Links restored */}
+          <div className="flex gap-3 justify-center">
+            {socialLinks?.map((social) => (
+              <a
+                key={social?.icon}
+                href={social?.href}
+                aria-label={social?.label}
+                className="w-10 h-10 rounded-full bg-background hover:bg-primary/10 flex items-center justify-center transition-colors duration-200"
+              >
+                <Icon name={social?.icon} size={20} color="var(--color-foreground)" />
+              </a>
+            ))}
           </div>
         </div>
-
+        
+        {/* Copyright and Legal Badges Section */}
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="font-body text-sm text-muted-foreground text-center md:text-left">

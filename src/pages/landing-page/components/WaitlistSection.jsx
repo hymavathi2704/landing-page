@@ -102,11 +102,11 @@ const WaitlistSection = () => {
             </div>
 
             <h2 className="font-headline font-bold text-3xl lg:text-4xl text-foreground mb-4">
-              You're On The List!
+              Interest Confirmed!
             </h2>
 
             <p className="font-body text-lg text-muted-foreground mb-6">
-              Check your email at <span className="font-semibold text-foreground">{formData?.email}</span> for your confirmation and exclusive early access details.
+              Check your email at <span className="font-semibold text-foreground">{formData?.email}</span> for your confirmation and future updates.
             </p>
 
             <div className="bg-background rounded-lg p-6 mb-6">
@@ -129,7 +129,7 @@ const WaitlistSection = () => {
                 <div className="flex items-start gap-3">
                   <Icon name="Gift" size={20} color="var(--color-accent)" className="mt-1 flex-shrink-0" />
                   <p className="font-body text-foreground">
-                    <span className="font-semibold">Early Access:</span> {formData?.role === 'coach' ? 'Zero commission for first 100 coaches' : 'Free first session credit'}
+                    <span className="font-semibold">Future Access:</span> You will be notified when the platform is ready for users
                   </p>
                 </div>
               </div>
@@ -176,14 +176,14 @@ const WaitlistSection = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-4">
             <Icon name="Rocket" size={20} color="var(--color-accent)" />
-            <span className="font-body text-sm font-semibold text-accent-foreground">Limited Beta Access</span>
+            <span className="font-body text-sm font-semibold text-accent-foreground">Future Platform Access</span>
           </div>
           <h2 className="font-headline font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">
-            Join The Balanced
-            <span className="block text-primary mt-2">Growth Revolution</span>
+            Show Your
+            <span className="block text-primary mt-2">Interest & Join For Updates</span>
           </h2>
           <p className="font-body text-lg text-muted-foreground max-w-2xl mx-auto">
-            Be among the first to experience coaching that treats everyone as equals
+            Be the first to know when the balanced coaching platform launches
           </p>
         </div>
 
@@ -191,7 +191,7 @@ const WaitlistSection = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="mb-6">
               <p className="font-body text-sm text-muted-foreground mb-4 text-center">
-                I'm joining as:
+                I'm interested as a:
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <button
@@ -243,7 +243,7 @@ const WaitlistSection = () => {
               <div className="space-y-4 animate-fade-in">
                 <div className="bg-accent/10 rounded-lg p-4 mb-4">
                   <p className="font-body text-sm text-foreground text-center">
-                    {formData?.role === 'coach' ?'🎉 First 100 coaches get lifetime zero commission on all sessions!' :'🎁 Join now and receive a complimentary first session with any coach!'}
+                    Thank you for showing interest! We will keep you updated on our progress and launch date.
                   </p>
                 </div>
 
@@ -266,7 +266,7 @@ const WaitlistSection = () => {
                   value={formData?.email}
                   onChange={handleChange}
                   error={errors?.email}
-                  description="We'll send your confirmation and early access details here"
+                  description="We'll send you updates and notifications about the launch"
                   required
                 />
 
@@ -278,8 +278,7 @@ const WaitlistSection = () => {
                   value={formData?.phone}
                   onChange={handleChange}
                   error={errors?.phone}
-                  description="For important launch notifications only"
-                  required
+                  description="For important launch notifications only (optional)"
                 />
 
                 <div>
@@ -298,7 +297,7 @@ const WaitlistSection = () => {
 
                 <div>
                   <Checkbox
-                    label="I agree to receive updates about Equibudx launch and early access opportunities"
+                    label="I agree to receive updates about Equibudx launch and future opportunities"
                     checked={agreedToTerms}
                     onChange={(e) => {
                       setAgreedToTerms(e?.target?.checked);
@@ -323,11 +322,11 @@ const WaitlistSection = () => {
                   iconPosition="right"
                   className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-cta"
                 >
-                  {isSubmitting ? 'Joining Waitlist...' : 'Secure My Spot'}
+                  {isSubmitting ? 'Submitting Request...' : 'Show My Interest'}
                 </Button>
 
                 <p className="text-center font-body text-xs text-muted-foreground">
-                  By joining, you agree to our Terms of Service and Privacy Policy
+                  By submitting your information, you agree to our Terms of Service and Privacy Policy
                 </p>
               </div>
             )}
@@ -342,13 +341,13 @@ const WaitlistSection = () => {
           </div>
           <div className="bg-card rounded-lg p-4 text-center">
             <Icon name="Zap" size={24} color="var(--color-secondary)" className="mx-auto mb-2" />
-            <p className="font-body text-sm text-foreground font-semibold">Instant Access</p>
-            <p className="font-body text-xs text-muted-foreground">Join in under 2 minutes</p>
+            <p className="font-body text-sm text-foreground font-semibold">Instant Updates</p>
+            <p className="font-body text-xs text-muted-foreground">Get notified immediately</p>
           </div>
           <div className="bg-card rounded-lg p-4 text-center">
             <Icon name="Gift" size={24} color="var(--color-accent)" className="mx-auto mb-2" />
-            <p className="font-body text-sm text-foreground font-semibold">Exclusive Benefits</p>
-            <p className="font-body text-xs text-muted-foreground">Early bird rewards</p>
+            <p className="font-body text-sm text-foreground font-semibold">Future Opportunities</p>
+            <p className="font-body text-xs text-muted-foreground">Be first in line</p>
           </div>
         </div>
       </div>

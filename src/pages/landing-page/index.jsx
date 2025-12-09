@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import HeaderNavigation from '../../components/navigation/HeaderNavigation';
 import ExitIntentModal from '../../components/navigation/ExitIntentModal';
 import HeroSection from './components/HeroSection';
-import PlatformVisionSection from './components/PlatformVisionSection';
-import BenefitsSection from './components/BenefitsSection';
-import FeaturesSection from './components/FeaturesSection';
+// import PlatformVisionSection from './components/PlatformVisionSection';
+// import BenefitsSection from './components/BenefitsSection';
+// import FeaturesSection from './components/FeaturesSection';
 import WaitlistSection from './components/WaitlistSection';
-import SocialProofSection from './components/SocialProofSection';
-import FAQSection from './components/FAQSection';
-import FinalCTASection from './components/FinalCTASection';
+// import SocialProofSection from './components/SocialProofSection';
+// import FAQSection from './components/FAQSection';
+// import FinalCTASection from './components/FinalCTASection';
 import FooterSection from './components/FooterSection';
 
 const LandingPage = () => {
@@ -28,15 +28,8 @@ const LandingPage = () => {
       
       <main>
         <HeroSection />
-        <PlatformVisionSection />
-        {/* TestimonialsSection removed */}
-        <BenefitsSection />
-        <FeaturesSection />
+        {/* Keeping only the WaitlistSection in the middle */}
         <WaitlistSection />
-        {/* LaunchTimelineSection removed */}
-        <SocialProofSection />
-        <FAQSection />
-        <FinalCTASection />
       </main>
 
       <FooterSection />

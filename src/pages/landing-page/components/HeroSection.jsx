@@ -10,10 +10,11 @@ const HeroSection = () => {
 
   useEffect(() => {
     setIsLogoAnimated(true);
-    const interval = setInterval(() => {
-      setWaitlistCount(prev => prev + Math.floor(Math.random() * 3));
-    }, 5000);
-    return () => clearInterval(interval);
+    // Commenting out the interval that updates the waitlist count since we're using static text now
+    // const interval = setInterval(() => {
+    //   setWaitlistCount(prev => prev + Math.floor(Math.random() * 3));
+    // }, 5000);
+    // return () => clearInterval(interval);
   }, []);
 
   const scrollToWaitlist = () => {
@@ -85,7 +86,7 @@ const HeroSection = () => {
             >
               Join the Waitlist
             </Button>
-            <Button
+            {/* <Button
               variant="outline"
               size="lg"
               onClick={scrollToVision}
@@ -95,8 +96,10 @@ const HeroSection = () => {
             >
               Learn Our Story
             </Button>
+            */}
           </div>
 
+          {/* Modified content to keep human logos but replace count with "Coming Soon" text */}
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-card rounded-full shadow-card">
             <div className="flex -space-x-2">
               <div className="w-8 h-8 rounded-full bg-primary/20 border-2 border-card flex items-center justify-center">
@@ -107,8 +110,8 @@ const HeroSection = () => {
               </div>
             </div>
             <div className="text-left">
-              <p className="font-headline font-bold text-2xl text-foreground">{waitlistCount?.toLocaleString()}</p>
-              <p className="font-body text-xs text-muted-foreground">coaches and clients already growing together</p>
+              <p className="font-headline font-bold text-2xl text-foreground">Coming Soon</p>
+              <p className="font-body text-xs text-muted-foreground">The balanced coaching platform</p>
             </div>
           </div>
         </div>

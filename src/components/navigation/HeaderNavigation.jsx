@@ -8,9 +8,9 @@ const HeaderNavigation = () => {
   const [activeSection, setActiveSection] = useState('');
 
   const navigationItems = [
-    { label: 'Platform Vision', anchor: '#vision', offset: 80 },
-    { label: 'How It Works', anchor: '#how-it-works', offset: 80 },
-    { label: 'FAQ', anchor: '#faq', offset: 80 }
+    // { label: 'Platform Vision', anchor: '#vision', offset: 80 }, // Removed per user request
+    // { label: 'How It Works', anchor: '#how-it-works', offset: 80 }, // Removed per user request
+    // { label: 'FAQ', anchor: '#faq', offset: 80 } // Removed per user request
   ];
 
   useEffect(() => {
