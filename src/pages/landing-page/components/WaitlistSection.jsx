@@ -3,6 +3,7 @@ import Icon from '../../../components/ui/AppIcon';
 import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
 import { Checkbox } from '../../../components/ui/Checkbox';
+import axios from 'axios'; // <-- ADDED: Import Axios for API calls
 
 const WaitlistSection = () => {
   const [formData, setFormData] = useState({
@@ -30,10 +31,9 @@ const WaitlistSection = () => {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    if (!formData?.phone?.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^\+?[\d\s-()]+$/?.test(formData?.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
+    // Phone is now optional but validate format if present
+    if (formData?.phone?.trim() && !/^\+?[\d\s-()]+$/?.test(formData?.phone)) {
+        newErrors.phone = 'Please enter a valid phone number';
     }
 
     if (!formData?.role) {
@@ -44,7 +44,8 @@ const WaitlistSection = () => {
       newErrors.terms = 'You must agree to the terms';
     }
 
-    setErrors(newErrors);
+    // Clear previous submission error when validating
+    setErrors({ ...newErrors, submit: '' }); 
     return Object.keys(newErrors)?.length === 0;
   };
 
@@ -57,7 +58,8 @@ const WaitlistSection = () => {
     if (errors?.[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: ''
+        [name]: '',
+        submit: '' // Clear submission error on input change
       }));
     }
   };
@@ -70,27 +72,62 @@ const WaitlistSection = () => {
     if (errors?.role) {
       setErrors(prev => ({
         ...prev,
-        role: ''
+        role: '',
+        submit: '' // Clear submission error on role change
       }));
     }
   };
 
+  // <-- UPDATED: Use Axios to connect to the backend API -->
   const handleSubmit = async (e) => {
     e?.preventDefault();
 
     if (!validateForm()) {
+      // Scroll to the first error
+      const firstErrorElement = document.querySelector('.text-error');
+      if (firstErrorElement) {
+        firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       return;
     }
 
     setIsSubmitting(true);
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // API call to the Node.js backend running on port 5000
+      await axios.post('http://localhost:5000/api/waitlist', formData);
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      setIsSubmitted(true);
+      localStorage.setItem('equibudx_user_role', formData?.role);
 
-    localStorage.setItem('equibudx_user_role', formData?.role);
+    } catch (error) {
+      console.error('Waitlist submission failed:', error);
+      
+      let errorMessage = 'Failed to submit interest. Please check your connection.';
+      
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        if (error.response.status === 409) {
+          // 409 Conflict: Email already exists (from your backend logic)
+          errorMessage = error.response.data?.message || 'That email is already registered. Thank you for your continued interest!';
+        } else if (error.response.status === 500) {
+          // 500 Server Error
+          errorMessage = 'A server error occurred. Please try again later.';
+        } else {
+          errorMessage = error.response.data?.message || `Error: ${error.response.status} returned from server.`;
+        }
+      }
+
+      setErrors(prev => ({
+        ...prev,
+        submit: errorMessage
+      }));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+  // <-- END UPDATED handleSubmit -->
+
 
   if (isSubmitted) {
     return (
@@ -311,6 +348,11 @@ const WaitlistSection = () => {
                     error={errors?.terms}
                   />
                 </div>
+                
+                {/* ADDED: Display submission error message */}
+                {errors?.submit && (
+                  <p className="mt-2 text-sm text-error text-center">{errors?.submit}</p>
+                )}
 
                 <Button
                   type="submit"
