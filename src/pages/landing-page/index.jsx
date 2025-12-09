@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'; // Added useState
 import HeaderNavigation from '../../components/navigation/HeaderNavigation';
-import ExitIntentModal from '../../components/navigation/ExitIntentModal';
+// import ExitIntentModal from '../../components/navigation/ExitIntentModal'; // REMOVED IMPORT
 import HeroSection from './components/HeroSection';
 // import PlatformVisionSection from './components/PlatformVisionSection';
 // import BenefitsSection from './components/BenefitsSection';
@@ -26,7 +26,7 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <HeaderNavigation />
-      <ExitIntentModal />
+      {/* REMOVED: <ExitIntentModal /> */}
       
       <main>
         {/* Pass the state control down to the WaitlistSection */}
