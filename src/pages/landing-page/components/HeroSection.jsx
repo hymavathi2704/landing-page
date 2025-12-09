@@ -116,9 +116,10 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      {/* Removed the animated scrolling arrow below the Coming Soon section */}
+      {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <Icon name="ChevronDown" size={32} color="var(--color-muted-foreground)" />
-      </div>
+      </div> */}
     </section>
   );
 };
